@@ -23,6 +23,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore"; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +38,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
     MatCardModule,
