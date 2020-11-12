@@ -41,41 +41,13 @@ loginFormGroup: FormGroup;
 
   login() {
     if (this.loginFormGroup.valid) {
-      
-      this.authService.login(
-        this.loginFormGroup.get("email").value,
-        this.loginFormGroup.get("password").value
-      ).then(result => {
-        if (result) {
-          this.router.navigate([""]);
-        }
-        else {
-          this.snackBar.open("Unable to log in", null, {
-            duration: 4000
-          });
-        }
-      }).catch(err => {
-        this.snackBar.open("Unable to log in", null, {
-            duration: 4000
-          });
-      });
+    
     }
   }
 
   async register() {
     if (this.registerFormGroup.valid) {
-      try {
-        await this.authService.signUp(
-          this.registerFormGroup.get("email").value,
-          this.registerFormGroup.get("password").value,
-          this.registerFormGroup.get("name").value
-        );
-        this.router.navigate([""]);
-      } catch (e) {
-        this.snackBar.open("Unable to register", null, {
-          duration: 4000
-        });
-      }
+    
     }
   }
 }

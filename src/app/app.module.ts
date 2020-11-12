@@ -8,11 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Custom404Component } from './pages/custom404/custom404.component';
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,6 +19,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -36,8 +34,6 @@ import { MatTabsModule } from '@angular/material/tabs';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
@@ -48,9 +44,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    AngularFireAuthModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
