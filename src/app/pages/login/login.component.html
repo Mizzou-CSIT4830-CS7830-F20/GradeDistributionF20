@@ -1,0 +1,48 @@
+<div class="gradient" fxLayout fxLayoutAlign="center center">
+    <mat-card class="login-card">
+        <div fxLayout="column">
+            <h1>Mizzou Grade Distribution</h1>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-tab-group>
+                    <mat-tab label="Login">
+                        <ng-template matTabContent>
+                            <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
+                                <div fxLayout="column" class="form-container">
+                                    <mat-form-field>
+                                        <input matInput required placeholder="Email" formControlName="email"
+                                            type="email" />
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <input matInput required placeholder="Password" formControlName="password"
+                                            type="password" />
+                                    </mat-form-field>
+                                    <button mat-button [disabled]="loginFormGroup.invalid">Login</button>
+                                </div>
+                            </form>
+                        </ng-template>
+                    </mat-tab>
+                    <mat-tab label="Register">
+                        <ng-template matTabContent>
+                            <form [formGroup]="registerFormGroup" (ngSubmit)="register()">
+                                <div fxLayout="column" class="form-container">
+                                    <mat-form-field>
+                                        <input matInput required placeholder="Name" formControlName="name" />
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <input matInput required placeholder="Email" formControlName="email"
+                                            type="email" />
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <input matInput required placeholder="Password" formControlName="password"
+                                            type="password" />
+                                    </mat-form-field>
+                                    <button mat-button [disabled]="registerFormGroup.invalid">Register</button>
+                                </div>
+                            </form>
+                        </ng-template>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </mat-card>
+</div>

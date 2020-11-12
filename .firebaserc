@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "gradedistributionapp": {
+      "hosting": {
+        "GradeDistributionF20": [
+          "gradedistributionapp"
+        ]
+      }
+    }
+  }
+}
