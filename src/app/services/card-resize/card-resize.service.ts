@@ -15,12 +15,9 @@ export class CardResizeService {
     sm: 2,
     xs: 1,
   };
-  // mediaSub: Subscription;
+
   media: Observable<MediaChange[]>;
   constructor(private mediaObserver: MediaObserver) {
-    // this.mediaSub = this.mediaObserver.asObservable().subscribe((changes: MediaChange[]) => {
-    //   this.numCols = this.gridByBreakpoint[changes[0].mqAlias];
-    // });
     this.media = this.mediaObserver.asObservable();
     this.numCols = this.media.pipe(
       map((mediaChanges: MediaChange[]) => {
