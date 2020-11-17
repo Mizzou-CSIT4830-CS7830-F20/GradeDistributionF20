@@ -1,0 +1,23 @@
+<div mat-dialog-title style="margin-bottom: -15px">
+    <h2 style="margin: 0px 0px 10px 0px">Add Professor</h2>
+    <mat-form-field style="width: 100%">
+        <input matInput (input)="onSearchChange($event.target.value)" placeholder="Search" autocomplete="off"
+            [disabled]="isLoading" />
+    </mat-form-field>
+</div>
+
+<mat-dialog-content style="height: 375px">
+    <ng-container *ngIf="!isLoading">
+        <p *ngFor="let choice of filteredChoices" (click)="onProfessorSelect(choice)" style="cursor: pointer"
+            class="mat-body">
+            {{ choice }}
+        </p>
+        <p *ngIf="filteredChoices.length == 0" class="mat-body">NO PROFESSORS</p>
+    </ng-container>
+    <ng-container *ngIf="isLoading">
+        <mat-progress-spinner mode="indeterminate" style="margin: auto; margin-top: 75px"></mat-progress-spinner>
+    </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close [disabled]="isLoading">Cancel</button>
+</mat-dialog-actions>

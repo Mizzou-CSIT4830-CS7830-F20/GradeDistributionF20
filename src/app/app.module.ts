@@ -24,13 +24,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AddProfessorComponent } from './components/add-professor/add-professor/add-professor.component';
+import { NavbarComponent } from './components/navbar/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     Custom404Component,
-    DashboardComponent
+    DashboardComponent,
+    AddProfessorComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

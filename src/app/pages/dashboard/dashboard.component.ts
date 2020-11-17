@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { prettifyName } from '../../../utils';
 import { DataService } from 'src/app/services/data/data.service';
 import { Observable } from 'rxjs';
-import { Professor } from 'src/types';
+import { Professor } from 'src/app/types/professor';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProfessorComponent } from 'src/app/components/add-professor/add-professor.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -11,10 +10,9 @@ import { CardResizeService } from 'src/app/services/card-resize/card-resize.serv
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   professors: Observable<Professor[]>;
 
   constructor(
@@ -26,22 +24,20 @@ export class DashboardComponent implements OnInit {
     this.professors = dataService.getProfessors();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public formatName(name: string): string {
-    return prettifyName(name);
+    return this.dataService.prettifyName(name);
   }
 
   addProfessor() {
     this.dialog.open(AddProfessorComponent, {
       width: '360px',
-      disableClose: true
+      disableClose: true,
     });
   }
 
   logout() {
     this.authService.logout();
   }
-
 }

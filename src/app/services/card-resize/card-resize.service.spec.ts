@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DataServiceService } from './data-service.service';
+import { CardResizeService } from './card-resize.service';
 
-describe('DataServiceService', () => {
-  let service: DataServiceService;
+describe('CardResizeService', () => {
+  let service: CardResizeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DataServiceService);
+    service = TestBed.inject(CardResizeService);
   });
 
   it('should be created', () => {
