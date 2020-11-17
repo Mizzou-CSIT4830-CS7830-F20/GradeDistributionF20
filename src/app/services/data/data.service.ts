@@ -21,7 +21,6 @@ export class DataService {
   ) {}
 
   getProfessors(): Observable<Professor[]> {
-    console.log('here');
     const currentUser = this.afAuth.currentUser;
 
     this.afAuth.currentUser.then((user) => {
@@ -45,62 +44,16 @@ export class DataService {
     return of([]);
   }
 
-  getClasses(professorId: string): Observable<ClassData[]> {
-    return this.db
-      .collection('professors')
-      .doc(professorId)
-      .collection<ClassData>('classes')
-      .valueChanges();
-  }
+  getClasses(professorId: string): Observable<ClassData[]> {}
 
-  getProfessorDetails(professorId: string): Observable<Professor> {
-    return this.db
-      .collection('professors')
-      .doc<Professor>(professorId)
-      .valueChanges();
-  }
+  getProfessorDetails(professorId: string): Observable<Professor> {}
 
-  addProfessorData(professorName: string): Promise<string> {
-    return new Promise<string>(async (resolve, reject) => {
-      // this is the URL to the scraper code located on Google Cloud
-      const url =
-        'https://us-central1-web-4830-f19-1572990531198.cloudfunctions.net/function-1';
-      const auth = this.afAuth.currentUser;
+  addProfessorData(professorName: string): Promise<string> {}
 
-      if (!auth) {
-        reject('Unable to authenticate');
-      }
-      const data = {
-        prof: professorName,
-        user_id: (await this.afAuth.currentUser).uid,
-      };
-      this.http.post<AddProfessorDataResponse>(url, data).subscribe(
-        (res) => {
-          resolve(
-            `Added ${res.classesAdded} classes for ${this.prettifyName(
-              professorName
-            )}`
-          );
-        },
-        () => {
-          reject(
-            `An error occurred while adding classes for ${this.prettifyName(
-              professorName
-            )}`
-          );
-        }
-      );
-    });
-  }
-
-  getClassDetails(professorId: string, classId: string): Observable<ClassData> {
-    return this.db
-      .collection('professors')
-      .doc(professorId)
-      .collection('classes')
-      .doc<ClassData>(classId)
-      .valueChanges();
-  }
+  getClassDetails(
+    professorId: string,
+    classId: string
+  ): Observable<ClassData> {}
   prettifyName(name: string) {
     const parts = name.split(',');
     if (parts.length === 1) {

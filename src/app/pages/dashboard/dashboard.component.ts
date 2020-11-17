@@ -20,24 +20,7 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService,
     public cardResizeService: CardResizeService
-  ) {
-    this.professors = dataService.getProfessors();
-  }
+  ) {}
 
   ngOnInit(): void {}
-
-  public formatName(name: string): string {
-    return this.dataService.prettifyName(name);
-  }
-
-  addProfessor() {
-    this.dialog.open(AddProfessorComponent, {
-      width: '360px',
-      disableClose: true,
-    });
-  }
-
-  logout() {
-    this.authService.logout();
-  }
 }
