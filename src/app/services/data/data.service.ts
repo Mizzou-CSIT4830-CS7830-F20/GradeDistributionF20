@@ -13,8 +13,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root',
 })
 export class DataService {
-  currentUserUID;
-
   constructor(
     private db: AngularFirestore,
     private http: HttpClient,
@@ -27,12 +25,10 @@ export class DataService {
     const currentUser = this.afAuth.currentUser;
 
     this.afAuth.currentUser.then((user) => {
-      this.currentUserUID = user.uid;
-
-      if (currentUser) {
+      if (user) {
         return this.db
           .collection<Professor>('professors', (ref) =>
-            ref.where('trackedBy', 'array-contains', this.currentUserUID)
+            ref.where('trackedBy', 'array-contains', user.uid)
           )
           .valueChanges()
           .pipe(
@@ -68,7 +64,7 @@ export class DataService {
     return new Promise<string>(async (resolve, reject) => {
       // this is the URL to the scraper code located on Google Cloud
       const url =
-        'https://us-central1-grade-distribution.cloudfunctions.net/update_prof_distributions-2';
+        'https://us-central1-web-4830-f19-1572990531198.cloudfunctions.net/function-1';
       const auth = this.afAuth.currentUser;
 
       if (!auth) {

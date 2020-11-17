@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Custom404Component } from './pages/custom404/custom404.component';
-import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AddProfessorComponent } from './components/add-professor/add-professor.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -24,8 +26,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { AddProfessorComponent } from './components/add-professor/add-professor/add-professor.component';
-import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+// import { ChartsModule } from 'ng2-charts';
+
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -34,7 +44,7 @@ import { NavbarComponent } from './components/navbar/navbar/navbar.component';
     Custom404Component,
     DashboardComponent,
     AddProfessorComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,8 +65,13 @@ import { NavbarComponent } from './components/navbar/navbar/navbar.component';
     AngularFireAuthModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatGridListModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    FlexLayoutModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

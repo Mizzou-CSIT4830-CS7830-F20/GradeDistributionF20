@@ -1,1 +1,24 @@
-<p>dashboard works!</p>
+<app-navbar></app-navbar>
+<div class="page-container">
+    <div fxLayout="column">
+        <p class="mat-display-1" style="margin-bottom: 20px; text-align: center;">Professors</p>
+        <mat-grid-list [cols]="cardResizeService.numCols | async" rowHeight="3:2">
+            <mat-grid-tile *ngFor="let professor of professors | async">
+                <mat-card [routerLink]="['/details/' + professor.id]" class="card-clickable">
+                    <mat-card-title>
+                        {{ formatName(professor.name) }}
+                    </mat-card-title>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <p *ngIf="!(professors | async)" class="mat-body">Loading...</p>
+        <button mat-fab (click)="addProfessor()"
+            style="position: fixed; bottom: 0px; right: 0px; margin-bottom: 15px; margin-right: 15px">
+            <mat-icon>add</mat-icon>
+        </button>
+        <p *ngIf="(professors | async)?.length == 0" class="mat-body">
+            You aren't observing any professors yet. Click the button to add a professor.
+        </p>
+    </div>
+</div>
