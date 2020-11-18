@@ -33,9 +33,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DashboardComponent,
     AddProfessorComponent,
     NavbarComponent,
+    ClassDetailsComponent,
   ],
   imports: [
     BrowserModule,

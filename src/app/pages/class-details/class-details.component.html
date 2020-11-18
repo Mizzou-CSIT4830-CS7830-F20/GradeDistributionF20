@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div class="page-container" fxLayout="row" fxLayoutAlign="center start">
+    <div class="content-container" fxLayout="column" fxLayoutAlign="start center" style="width: 60%; min-width: 400px">
+        <h1 class="mat-display-1" style="margin-bottom: 10px; text-align: center">
+            {{ (classDetails | async)?.dept }} {{ (classDetails | async)?.number }}: {{ (classDetails | async)?.title }}
+        </h1>
+        <div fxLayout="row" fxLayoutAlign="space-around center" style="width: 100%">
+            <div class="meta-container" matTooltip="Semester">
+                <mat-icon class="meta-icon">calendar_today</mat-icon>
+                <p class="mat-body meta-label">{{ (classDetails | async)?.term }}</p>
+            </div>
+            <div class="meta-container" matTooltip="Professor">
+                <mat-icon class="meta-icon">person</mat-icon>
+                <p class="mat-body meta-label">{{ (classDetails | async)?.instructor }}</p>
+            </div>
+            <div class="meta-container" matTooltip="Average GPA">
+                <mat-icon class="meta-icon">assessment</mat-icon>
+                <p class="mat-body meta-label">{{ (classDetails | async)?.avg }}</p>
+            </div>
+            <div class="meta-container" matTooltip="Updated At">
+                <mat-icon class="meta-icon">refresh</mat-icon>
+                <p class="mat-body meta-label">
+                    {{ (classDetails | async)?.updatedAt.seconds * 1000 | date: 'MM-dd-yyyy' }}</p>
+            </div>
+        </div>
+
+        <div style="width: 100%; margin-top: 25px">
+            <ng-container *ngIf="barChartData">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                    chartType="bar"> </canvas>
+            </ng-container>
+        </div>
+    </div>
+</div>
