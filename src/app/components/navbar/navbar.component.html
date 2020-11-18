@@ -1,1 +1,6 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary" class="app-toolbar">
+    <h1 (click)="goToDashboard()" style="cursor: pointer">Mizzou Grade Distribution</h1>
+    <ng-content></ng-content>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>
