@@ -9,6 +9,7 @@ import { Custom404Component } from './pages/custom404/custom404.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddProfessorComponent } from './components/add-professor/add-professor.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ClassDetailsComponent } from './pages/class-details/class-details.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -28,15 +29,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { ChartsModule } from 'ng2-charts';
+import { HttpClientModule } from '@angular/common/http';
 
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import { ChartsModule } from 'ng2-charts';
+import { DetailsComponent } from './pages/details/details.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
     AddProfessorComponent,
     NavbarComponent,
     ClassDetailsComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +73,7 @@ import { ClassDetailsComponent } from './pages/class-details/class-details.compo
     MatTooltipModule,
     FlexLayoutModule,
     HttpClientModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

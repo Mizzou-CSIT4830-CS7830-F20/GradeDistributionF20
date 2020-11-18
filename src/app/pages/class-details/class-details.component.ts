@@ -19,7 +19,8 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
     legend: null,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      xAxes: [{ categoryPercentage: 1.0, barPercentage: 1.0 }],
+      // xAxes: [{ categoryPercentage: 1.0, barPercentage: 1.0 }],
+      xAxes: [{}],
       yAxes: [{}],
     },
   };

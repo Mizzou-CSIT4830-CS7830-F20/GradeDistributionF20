@@ -1,0 +1,15 @@
+<app-navbar> </app-navbar>
+<div class="page-container">
+    <p class="mat-display-1" style="margin-bottom: 20px; text-align: center">{{ (professorDetails | async)?.name }}</p>
+    <mat-grid-list [cols]="cardResizeService.numCols | async" rowHeight="3:2">
+        <mat-grid-tile *ngFor="let c of classes | async">
+            <mat-card class="card-clickable" (click)="goToClassDetails(c.id)">
+                <mat-card-title>{{ c.dept }} {{ c.number }}: {{ c.title }}</mat-card-title>
+                <mat-card-content>
+                    <p>Average GPA: {{ c.avg }}</p>
+                    <p>{{ c.term }}</p>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
