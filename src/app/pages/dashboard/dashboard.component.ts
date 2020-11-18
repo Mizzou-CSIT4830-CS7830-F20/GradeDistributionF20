@@ -22,17 +22,11 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     public cardResizeService: CardResizeService
   ) {
-    console.log('get professors');
-
     this.authService.checkUser().then((user) => {
       if (user) {
         this.professors = dataService.getProfessors(user.uid);
       }
     });
-
-    // this.professors.forEach((professor) => {
-    //   console.log(professor);
-    // });
   }
 
   ngOnInit(): void {}
