@@ -49,7 +49,14 @@ export class DataService {
       .collection<Professor>('professors', (ref) =>
         ref.where('trackedBy', 'array-contains', userID)
       )
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        map((professors) => {
+          return professors.sort((profA, profB) => {
+            return profA.name > profB.name ? 1 : -1;
+          });
+        })
+      );
     // .pipe(
     //   map((professors) => {
     //     professors.sort((profA, profB) => {

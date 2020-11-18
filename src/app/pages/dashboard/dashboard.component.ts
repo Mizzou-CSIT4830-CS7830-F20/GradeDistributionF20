@@ -27,13 +27,6 @@ export class DashboardComponent implements OnInit {
     this.authService.checkUser().then((user) => {
       if (user) {
         this.professors = dataService.getProfessors(user.uid);
-        // .pipe(
-        //   map((professors) => {
-        //     professors.sort((profA, profB) => {
-        //       return profA.name > profB.name ? 1 : -1;
-        //     });
-        //   })
-        // );
       }
     });
 
