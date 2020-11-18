@@ -75,8 +75,7 @@ export class DataService {
 
   addProfessorData(professorName: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
-      const url =
-        'https://us-central1-gradedistributionappf20.cloudfunctions.net/GetProfessorDataF20';
+      const url = 'put your URL to cloud function here';
 
       this.afAuth.currentUser.then((user) => {
         if (user) {
