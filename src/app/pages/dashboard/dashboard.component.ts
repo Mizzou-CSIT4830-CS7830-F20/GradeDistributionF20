@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddProfessorComponent } from 'src/app/components/add-professor/add-professor.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CardResizeService } from 'src/app/services/card-resize/card-resize.service';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,24 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     public cardResizeService: CardResizeService
   ) {
-    this.professors = dataService.getProfessors();
+    console.log('get professors');
+
+    this.authService.checkUser().then((user) => {
+      if (user) {
+        this.professors = dataService.getProfessors(user.uid);
+        // .pipe(
+        //   map((professors) => {
+        //     professors.sort((profA, profB) => {
+        //       return profA.name > profB.name ? 1 : -1;
+        //     });
+        //   })
+        // );
+      }
+    });
+
+    // this.professors.forEach((professor) => {
+    //   console.log(professor);
+    // });
   }
 
   ngOnInit(): void {}

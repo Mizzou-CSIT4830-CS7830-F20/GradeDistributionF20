@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
 import { switchMap, map } from 'rxjs/operators';
 import { User } from 'src/app/types/user';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-    constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) { 
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private router: Router
+  ) {
     this.afAuth.setPersistence('session');
     // this.currentAuth = this.afAuth.authState;
     // this.currentUser = this.afAuth
@@ -28,32 +35,38 @@ export class AuthService {
     // );
   }
 
+  async checkUser() {
+    return this.afAuth.currentUser;
+  }
+
   async login(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
     // return this.afAuth.signInWithEmailAndPassword(email, password).then((result) => {
-    //   return true; 
+    //   return true;
     // }).catch((e) => {
-    //   return false; 
+    //   return false;
     // });
   }
 
   logout() {
+    this.router.navigate(['/login']);
     return this.afAuth.signOut();
-    // this.router.navigate(['/login']);
   }
 
   async signUp(email: string, password: string, first: string) {
     // try {
-      const cred = await this.afAuth.createUserWithEmailAndPassword(email, password).then(result => {
+    const cred = await this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
         const newUser: User = {
           first,
           email,
-          uid: result.user.uid
+          uid: result.user.uid,
         };
 
         this.setUserData(newUser);
       });
-      
+
     //   this.afs.doc<User>(`users/${cred.user.uid}`).set(newUser);
     // } catch (err) {
     //   throw new Error('Could not create account');
@@ -61,10 +74,10 @@ export class AuthService {
   }
   setUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-			`users/${user.uid}`
-		);
-		return userRef.set(user, {
-			merge: true
-		});
+      `users/${user.uid}`
+    );
+    return userRef.set(user, {
+      merge: true,
+    });
   }
 }
