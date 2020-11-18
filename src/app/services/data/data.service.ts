@@ -21,7 +21,7 @@ export class DataService {
   ) {}
 
   getProfessors(): Observable<Professor[]> {
-    const currentUser = this.afAuth.currentUser;
+    // const currentUser = this.afAuth.currentUser;
 
     this.afAuth.currentUser.then((user) => {
       if (user) {
@@ -37,6 +37,8 @@ export class DataService {
               })
             )
           );
+      } else {
+        console.log('User not logged in ');
       }
     });
 
@@ -44,16 +46,64 @@ export class DataService {
     return of([]);
   }
 
-  getClasses(professorId: string): Observable<ClassData[]> {}
+  getClasses(professorId: string): Observable<ClassData[]> {
+    return this.db
+      .collection('professors')
+      .doc(professorId)
+      .collection<ClassData>('classes')
+      .valueChanges();
+  }
 
-  getProfessorDetails(professorId: string): Observable<Professor> {}
+  getProfessorDetails(professorId: string): Observable<Professor> {
+    return this.db
+      .collection('professors')
+      .doc<Professor>(professorId)
+      .valueChanges();
+  }
 
-  addProfessorData(professorName: string): Promise<string> {}
+  addProfessorData(professorName: string): Promise<string> {
+    return new Promise<string>(async (resolve, reject) => {
+      const url =
+        'https://us-central1-gradedistributionappf20.cloudfunctions.net/GetProfessorDataF20';
 
-  getClassDetails(
-    professorId: string,
-    classId: string
-  ): Observable<ClassData> {}
+      this.afAuth.currentUser.then((user) => {
+        if (user) {
+          const data = {
+            prof: professorName,
+            user_id: user.uid,
+          };
+
+          this.http.post<AddProfessorDataResponse>(url, data).subscribe(
+            (res) => {
+              resolve(
+                `Added ${res.classesAdded} classes for ${this.prettifyName(
+                  professorName
+                )}`
+              );
+            },
+            () => {
+              reject(
+                `An error occured while adding classes for ${this.prettifyName(
+                  professorName
+                )}`
+              );
+            }
+          );
+        } else {
+          reject('Unable to Authenticate');
+        }
+      });
+    });
+  }
+
+  getClassDetails(professorId: string, classId: string): Observable<ClassData> {
+    return this.db
+      .collection('professors')
+      .doc<Professor>(professorId)
+      .collection('classes')
+      .doc<ClassData>(classId)
+      .valueChanges();
+  }
   prettifyName(name: string) {
     const parts = name.split(',');
     if (parts.length === 1) {

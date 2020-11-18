@@ -17,11 +17,39 @@ export class AddProfessorComponent implements OnInit {
     private matDialog: MatDialogRef<AddProfessorComponent>,
     private dataService: DataService,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    this.choices = professors.names;
+    this.filteredChoices = this.choices.slice(0, 100);
+  }
 
   ngOnInit(): void {}
 
-  onSearchChange(searchVal: string) {}
+  onSearchChange(searchVal: string) {
+    const searchValUpper = searchVal.toUpperCase();
 
-  async onProfessorSelect(professorName: string) {}
+    this.filteredChoices = this.choices
+      .filter((professor) => {
+        return professor.toUpperCase().includes(searchValUpper);
+      })
+      .slice(0, 100);
+  }
+
+  async onProfessorSelect(professorName: string) {
+    this.isLoading = true;
+
+    this.dataService
+      .addProfessorData(professorName)
+      .then((successMsg) => {
+        console.log(successMsg);
+
+        this.isLoading = false;
+        this.snackBar.open(successMsg, null, { duration: 5000 });
+        this.matDialog.close();
+      })
+      .catch((errMsg) => {
+        console.log(errMsg);
+        this.isLoading = false;
+        this.snackBar.open(errMsg, null, { duration: 5000 });
+      });
+  }
 }
