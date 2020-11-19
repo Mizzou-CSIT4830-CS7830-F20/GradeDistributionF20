@@ -6,6 +6,14 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import {
+  AngularFireAuthGuard,
+  redirectUnauthorizedTo,
+  redirectLoggedInTo,
+} from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['/']);
 
 const routes: Routes = [
   {
@@ -13,20 +21,25 @@ const routes: Routes = [
     pathMatch: 'full',
     component: DashboardComponent,
     // canActivate: [AuthGuardService],
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   {
     path: 'login',
     component: LoginComponent,
+    data: { authGuardPipe: redirectLoggedInToItems },
   },
   {
     path: 'details/:id',
     component: DetailsComponent,
     // canActivate: [AuthGuardService],
+    canActivate: [AngularFireAuthGuard],
   },
   {
     path: 'classDetails/:professorId/:classId',
     component: ClassDetailsComponent,
     // canActivate: [AuthGuardService],
+    canActivate: [AngularFireAuthGuard],
   },
   {
     path: '**',
