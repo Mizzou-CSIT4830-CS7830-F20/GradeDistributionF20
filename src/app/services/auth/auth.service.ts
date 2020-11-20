@@ -14,25 +14,34 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  // currentUser: boolean;
+  currentUser: Observable<User>;
+
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
     this.afAuth.setPersistence('session');
-    // this.currentAuth = this.afAuth.authState;
-    // this.currentUser = this.afAuth
 
-    // this.currentUser = this.currentAuth.pipe(
-    //   switchMap((cred: firebase.User | null) => {
-    //     if (cred) {
-    //       return this.afs.doc<User>(`users/${cred.uid}`).valueChanges();
-    //     } else {
-    //       return of(undefined);
-    //     }
-    //   }),
-    //   map(userDetails => userDetails as User)
-    // );
+    // this.afAuth.currentUser.then((user) => {
+    //   if (user) {
+    //     this.currentUser = true;
+    //   } else {
+    //     this.currentUser = false;
+    //   }
+    // });
+
+    this.currentUser = this.afAuth.authState.pipe(
+      switchMap((cred) => {
+        if (cred) {
+          return this.afs.doc<User>(`users/${cred.uid}`).valueChanges();
+        } else {
+          return of(undefined);
+        }
+      }),
+      map((userDetails) => userDetails as User)
+    );
   }
 
   async checkUser() {
