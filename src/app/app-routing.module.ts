@@ -4,8 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { Custom404Component } from './pages/custom404/custom404.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DetailsComponent } from './pages/details/details.component';
-import { AuthGuardService } from './services/auth/auth-guard.service';
 import { ClassDetailsComponent } from './pages/class-details/class-details.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +13,8 @@ const routes: Routes = [
     pathMatch: 'full',
     component: DashboardComponent,
     // canActivate: [AuthGuardService],
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
   },
   {
     path: 'login',

@@ -14,12 +14,25 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  currentUser: Observable<User>;
+
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
     this.afAuth.setPersistence('session');
+
+    this.currentUser = this.afAuth.authState.pipe(
+      switchMap((cred) => {
+        if (cred) {
+          return this.afs.doc<User>(`users/${cred.uid}`).valueChanges();
+        } else {
+          return of(undefined);
+        }
+      }),
+      map((userDetails) => userDetails as User)
+    );
   }
 
   async checkUser() {
