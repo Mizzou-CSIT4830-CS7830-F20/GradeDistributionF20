@@ -75,7 +75,8 @@ export class DataService {
 
   addProfessorData(professorName: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
-      const url = 'put your URL to cloud function here';
+      const url =
+        'https://us-central1-gradedistributionappf20.cloudfunctions.net/GetGPA';
 
       this.afAuth.currentUser.then((user) => {
         if (user) {
