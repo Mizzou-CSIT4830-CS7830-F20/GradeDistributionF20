@@ -14,6 +14,7 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
   classDetails: Observable<ClassData>;
   classId: string;
   professorId: string;
+
   barChartOptions: ChartOptions = {
     responsive: true,
     legend: null,
@@ -24,6 +25,7 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
       yAxes: [{}],
     },
   };
+
   barChartLabels: Label[] = ['A', 'B', 'C', 'D', 'F'];
   barChartData: ChartDataSets[];
   barChartDataSub: Subscription;

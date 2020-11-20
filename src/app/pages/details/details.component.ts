@@ -15,6 +15,7 @@ export class DetailsComponent implements OnInit {
   classes: Observable<ClassData[]>;
   professorDetails: Observable<Professor>;
   professorId: string;
+
   constructor(
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class DetailsComponent implements OnInit {
       this.professorId
     );
   }
+
   goToClassDetails(classId: string) {
     this.router.navigate([`/classDetails/${this.professorId}/${classId}`]);
   }

@@ -17,27 +17,12 @@ import { rejects } from 'assert';
   providedIn: 'root',
 })
 export class DataService {
-  professorCollection: AngularFirestoreCollection<Professor>;
-  professors: Observable<Professor[]>;
-
   constructor(
     private db: AngularFirestore,
     private http: HttpClient,
     private authService: AuthService,
     private afAuth: AngularFireAuth
-  ) {
-    this.afAuth.currentUser.then((user) => {
-      this.professorCollection = this.db.collection<Professor>(
-        'professors',
-        (ref) => ref.where('trackedBy', 'array-contains', user.uid)
-      );
-      this.professors = this.professorCollection.valueChanges();
-
-      this.professors.forEach((professor) => {
-        console.log(professor);
-      });
-    });
-  }
+  ) {}
 
   getProfessors(userID): Observable<Professor[]> {
     return this.db

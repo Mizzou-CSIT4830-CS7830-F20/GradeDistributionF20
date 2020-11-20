@@ -13,6 +13,7 @@ export class AddProfessorComponent implements OnInit {
   choices: string[];
   filteredChoices: string[];
   isLoading = false;
+
   constructor(
     private matDialog: MatDialogRef<AddProfessorComponent>,
     private dataService: DataService,

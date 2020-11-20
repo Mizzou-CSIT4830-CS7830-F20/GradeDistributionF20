@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup;
   registerFormGroup: FormGroup;
+
   constructor(
     private authService: AuthService,
     private snackBar: MatSnackBar,
