@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/GradeDistributionF20",
     "ignore": [
       "firebase.json",
       "**/.*",
